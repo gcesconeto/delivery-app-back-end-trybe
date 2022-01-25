@@ -1,0 +1,1 @@
+module.exports.NOT_FOUND = { status: 404, message: 'nao achou' };
