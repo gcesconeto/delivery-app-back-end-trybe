@@ -1,5 +1,2 @@
-const error = require('./error');
-
-module.exports = {
-  error,
-};
+module.exports.error = require('./error');
+module.exports.validateLogin = require('./validateLogin');
