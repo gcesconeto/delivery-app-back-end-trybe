@@ -9,10 +9,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       tableName: 'sales_products',
       timestamps: false,
-      underscore: true,
+      underscored: true,
     });
   
-    salesProducts.associate = (models) => {
+    salesProduct.associate = (models) => {
         models.sale.belongsToMany(models.product, {
             as: 'products',
             through: salesProduct,
@@ -27,6 +27,6 @@ module.exports = (sequelize, DataTypes) => {
         });
     };
   
-    return user;
+    return salesProduct;
 };
   
