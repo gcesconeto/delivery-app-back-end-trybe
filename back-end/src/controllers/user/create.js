@@ -7,9 +7,9 @@ module.exports = async (req, res, next) => {
     const { name, email, password, role } = req.body;
     const token = req.headers.authorization;
 
-    await user.create({ name, email, password, role }, token);
+    const newUserToken = await user.create({ name, email, password, role }, token);
 
-    res.status(CREATED).end();
+    res.status(CREATED).json({ token: newUserToken });
   } catch (err) {
     next(err);
   }

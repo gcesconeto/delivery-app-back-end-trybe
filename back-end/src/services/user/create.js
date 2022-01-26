@@ -11,12 +11,14 @@ module.exports = async ({ name, email, password, role }, token) => {
 
     if (await user.findOne({ where: { email } })) throw err.ALREADY_EXISTS;
 
-    const createdUser = await user.create({
+    await user.create({
       name,
       email,
       password: md5(password),
       role: newUserRole,
     });
 
-    return createdUser;
+    const newUserToken = auth.generateJwt({ name, email, role: newUserRole });
+
+    return newUserToken;
 };
