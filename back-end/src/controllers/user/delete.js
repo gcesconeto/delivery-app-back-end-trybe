@@ -1,8 +1,14 @@
-const { NOT_IMPLEMENTED } = require('http-status-codes').StatusCodes;
+const { NO_CONTENT } = require('http-status-codes').StatusCodes;
 
-module.exports = (req, res, next) => {
+const { user } = require('../../services');
+
+module.exports = async (req, res, next) => {
   try {
-    res.status(NOT_IMPLEMENTED).end();
+    const { email } = req.body;
+
+    await user.delete(email);
+
+    res.status(NO_CONTENT).end();
   } catch (err) {
     next(err);
   }

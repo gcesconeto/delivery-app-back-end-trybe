@@ -1,8 +1,14 @@
-const { NOT_IMPLEMENTED } = require('http-status-codes').StatusCodes;
+const { OK } = require('http-status-codes').StatusCodes;
 
-module.exports = (req, res, next) => {
+const { user } = require('../../services');
+
+module.exports = async (req, res, next) => {
   try {
-    res.status(NOT_IMPLEMENTED).end();
+    const { email, password } = req.body;
+
+    const token = await user.login({ email, password });
+
+    res.status(OK).json({ token });
   } catch (err) {
     next(err);
   }

@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
     const sale = sequelize.define('sale',
     {
-      user_id: {
+      userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         foreignKey: true
       },
-      seller_id: {
+      sellerId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         foreignKey: true
@@ -33,16 +33,16 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: true,
       createdAt: 'sale_date',
       updatedAt: false,
-      underscore: true,
+      underscored: true,
     });
   
     sale.associate = (models) => {
-      sale.belongsToMany(models.user,
-        { foreignKey: 'user_id', as: 'sales' })
-      sale.belongsToMany(models.user,
-        { foreignKey: 'seller_id', as: 'sales' });
+      sale.belongsTo(models.user,
+        { foreignKey: 'user_id', as: 'user' })
+      sale.belongsTo(models.user,
+        { foreignKey: 'seller_id', as: 'seller' });
     };
   
-    return user;
+    return sale;
   };
   
