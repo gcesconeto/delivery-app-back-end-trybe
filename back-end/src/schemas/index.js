@@ -1,1 +1,1 @@
-module.exports.login = require('./login');
+module.exports.user = require('./user');

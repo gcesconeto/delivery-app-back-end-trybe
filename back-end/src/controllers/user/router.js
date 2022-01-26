@@ -1,12 +1,12 @@
 const express = require('express');
 
-const { validateLogin } = require('../../middlewares');
+const { user } = require('../../middlewares');
 
 const router = express.Router({ mergeParams: true });
 
 router.post(
   '/register',
-  validateLogin,
+  user.create,
   require('./create'),
 );
 router.post('/login', require('./login'));
