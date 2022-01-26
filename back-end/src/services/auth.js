@@ -6,4 +6,11 @@ const jwtKey = require('fs')
 
 module.exports.generateJwt = (payload) => jwt.sign(payload, jwtKey, { expiresIn: '7d' });
 
-module.exports.verifyJwt = (token) => jwt.verify(token, jwtKey);
+module.exports.verifyJwt = (token) => {
+  try {
+    return jwt.verify(token, jwtKey);
+  } catch (err) {
+    err.status = 401;
+    throw err;
+  }
+};
