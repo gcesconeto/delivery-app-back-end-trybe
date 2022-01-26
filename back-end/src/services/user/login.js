@@ -11,7 +11,7 @@ module.exports = async ({ email, password }) => {
 
   if (userFound.password !== md5(password)) throw errors.INCORRECT_PASSWORD;
 
-  const { name, role } = user;
+  const { name, role } = userFound;
   const token = auth.generateJwt({ name, email, role });
 
   return token;
