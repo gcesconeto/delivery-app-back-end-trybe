@@ -9,7 +9,11 @@ router.post(
   user.create,
   require('./create'),
 );
-router.post('/login', require('./login'));
+router.post(
+  '/login',
+  user.login,
+  require('./login'),
+);
 router.get('/list', require('./list'));
 router.delete('/delete', require('./delete'));
 
