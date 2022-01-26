@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { user } = require('../../middlewares');
+const { user, auth } = require('../../middlewares');
 
 const router = express.Router({ mergeParams: true });
 
@@ -14,6 +14,8 @@ router.post(
   user.login,
   require('./login'),
 );
+
+router.use(auth);
 router.get('/list', require('./list'));
 router.delete('/delete', require('./delete'));
 
