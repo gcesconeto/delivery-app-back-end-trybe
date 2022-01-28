@@ -19,6 +19,7 @@ function Provider({ children }) {
     const result = await axios
       .get(endpoints.sale.list, { headers: { Authorization: token } });
     setOrders(result.data);
+    console.log(result.data);
   });
 
   return (

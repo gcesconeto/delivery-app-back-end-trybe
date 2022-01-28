@@ -4,7 +4,8 @@ import {
   SectionHeader,
   ButtonHeader,
   HeaderComponent,
-  NavHeader } from '../styles/header';
+  NavHeader,
+  NameHeader } from '../styles/header';
 
 function Header() {
   const localStorageUser = JSON.parse(localStorage.getItem('user'));
@@ -33,11 +34,11 @@ function Header() {
           </ButtonHeader>
         </SectionHeader>
         <SectionHeader>
-          <h1
+          <NameHeader
             data-testid="customer_products__element-navbar-user-full-name"
           >
             { localStorageUser.name || 'name' }
-          </h1>
+          </NameHeader>
           <ButtonHeader
             type="button"
             data-testid="customer_products__element-navbar-link-logout"

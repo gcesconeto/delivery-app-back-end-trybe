@@ -1,19 +1,32 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { string, number, arrayOf } from 'prop-types';
 import { Table, TbodyTable, TrTable, MainTable, TotalTable, TdTable, ThTable }
   from '../styles/table';
+import Context from '../context/Context';
 
 function ProductTable({
-  total,
   dataIdItem,
   cartItem,
-  subTotal,
   remove,
-  qtd,
   displayTotal,
   displayRemove,
 }) {
-  if (total === undefined) total = 0;
+  const { total, shoppingCart, setShoppingCart, setTotal } = useContext(Context);
+  const removeFromCart = (item) => {
+    const actual = { ...shoppingCart };
+    delete actual[item];
+    setShoppingCart(actual);
+  };
+  useEffect(() => {
+    const sum = () => {
+      const items = Object.values(shoppingCart);
+      const soma = items.reduce((acc, { quantity, productPrice }) => (
+        acc + (quantity * productPrice)
+      ), 0);
+      setTotal(soma);
+    };
+    sum();
+  }, [shoppingCart]);
   return (
     <MainTable>
       <Table>
@@ -31,46 +44,47 @@ function ProductTable({
             }
           </tr>
           {
-            cartItem && cartItem.map((cart, index) => (
-              <TrTable key={ cart.id }>
+            cartItem && Object.entries(cartItem).map((cart, index) => (
+              <TrTable key={ cart[1].productId }>
                 <TdTable
                   data-testid={
                     `customer_${dataIdItem}__element-order-table-item-number-${index}`
                   }
                 >
-                  { cart.id }
+                  { index + 1 }
                 </TdTable>
                 <TdTable
                   data-testid={
                     `customer_${dataIdItem}__element-order-table-name-${index}`
                   }
                 >
-                  { cart.name }
+                  { cart[1].productName }
                 </TdTable>
                 <TdTable
                   data-testid={
                     `customer_${dataIdItem}__element-order-table-quantity-${index}`
                   }
                 >
-                  { qtd }
+                  { cart[1].quantity }
                 </TdTable>
                 <TdTable
                   data-testid={
                     `customer_${dataIdItem}__element-order-table-unit-price-${index}`
                   }
                 >
-                  { cart.price }
+                  { `R$${cart[1].productPrice.replace('.', ',')}` }
                 </TdTable>
                 <TdTable
                   data-testid={
-                    `customer_${dataIdItem}__element-order-table-sub-total-${'index'}`
+                    `customer_${dataIdItem}__element-order-table-sub-total-${index}`
                   }
                 >
-                  { subTotal }
+                  { `R$ ${cart[1].subTotal.replace('.', ',')}` }
                 </TdTable>
                 {
                   displayRemove && (
                     <TdTable
+                      onClick={ () => removeFromCart(cart[1].productId) }
                       data-testid={
                         `customer_${dataIdItem}__element-order-table-remove-${index}`
                       }
@@ -87,7 +101,7 @@ function ProductTable({
       {
         displayTotal && (
           <TotalTable data-testid={ `customer_${dataIdItem}__element-order-total-price` }>
-            { `Total: R$ ${total}` }
+            { `Total: R$ ${total.toFixed(2).toString().replace('.', ',')}` }
           </TotalTable>
         )
       }
