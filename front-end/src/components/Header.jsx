@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   SectionHeader,
   ButtonHeader,
@@ -6,7 +7,14 @@ import {
   NavHeader } from '../styles/header';
 
 function Header() {
-  const localStorageUser = JSON.parse(localStorage.getItem('userName'));
+  const localStorageUser = JSON.parse(localStorage.getItem('user'));
+  const navigate = useNavigate();
+
+  const handleExit = () => {
+    localStorage.clear();
+    navigate('/login');
+  };
+
   return (
     <HeaderComponent>
       <NavHeader>
@@ -25,15 +33,15 @@ function Header() {
           </ButtonHeader>
         </SectionHeader>
         <SectionHeader>
-          <ButtonHeader
-            type="button"
+          <h1
             data-testid="customer_products__element-navbar-user-full-name"
           >
-            { localStorageUser }
-          </ButtonHeader>
+            { localStorageUser.name || 'name' }
+          </h1>
           <ButtonHeader
             type="button"
             data-testid="customer_products__element-navbar-link-logout"
+            onClick={ handleExit }
           >
             Sair
           </ButtonHeader>

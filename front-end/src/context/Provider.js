@@ -23,14 +23,37 @@ const endpoints = {
 /* Provider do Context */
 function Provider({ children }) {
   const [user, setUser] = useState({});
+  const [products, setProducts] = useState([]);
+  const [shoppingCart, setShoppingCart] = useState({});
+  const [total, setTotal] = useState(0);
   console.log(user);
 
   const loginSubmit = (loginForm) => axios.post(endpoints.user.login, loginForm);
   const fetchApi = (endpoint, body) => axios.post(endpoint, body);
 
+  const getProducts = () => {
+    const token = localStorage.getItem('token');
+    axios
+      .get(endpoints.product.list, { headers: { Authorization: token } })
+      .then((res) => setProducts(res.data)).catch((err) => console.log(err));
+  };
+
   return (
-    <Context.Provider value={ { setUser, loginSubmit, endpoints, fetchApi } }>
-      {children}
+    <Context.Provider
+      value={ {
+        setUser,
+        loginSubmit,
+        endpoints,
+        products,
+        fetchApi,
+        getProducts,
+        total,
+        setTotal,
+        shoppingCart,
+        setShoppingCart,
+      } }
+    >
+      { children }
     </Context.Provider>
   );
 }
