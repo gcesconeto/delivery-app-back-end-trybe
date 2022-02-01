@@ -11,7 +11,6 @@ import customerPages from './pages/customer';
 import { Global, Customer } from './context';
 
 const customerRoutes = (checker) => {
-  console.log('customer fsfs', checker);
   if (checker) checker();
   return (
     <>
