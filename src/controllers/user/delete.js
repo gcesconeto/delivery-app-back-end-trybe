@@ -5,8 +5,9 @@ const { user } = require('../../services');
 module.exports = async (req, res, next) => {
   try {
     const { email } = req.body;
-
-    await user.delete(email);
+    const { role } = req.user;
+    const userEmail = req.user.email;
+    await user.delete(email, role, userEmail);
 
     res.status(NO_CONTENT).end();
   } catch (err) {

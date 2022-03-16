@@ -5,7 +5,7 @@ const shell = require('shelljs');
 const app = require('../api/app');
 const db = require('../database/models');
 
-describe('Test endpoint POST `/user/delete`', () => {
+describe('Test endpoint DELETE `/user/delete`', () => {
     beforeEach(() => {
       shell.exec('npx sequelize-cli db:drop');
       shell.exec('npx sequelize-cli db:create && npx sequelize-cli db:migrate');
