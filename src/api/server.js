@@ -1,8 +1,8 @@
 const socketIo = require('socket.io');
 
-const socketIoServer = require('./app');
+const socketIoServer = require('./socket');
 
-const port = process.env.PORT || 3001;
+const port = process.env.API_PORT || 3001;
 
 const io = socketIo(socketIoServer, {
     cors: {

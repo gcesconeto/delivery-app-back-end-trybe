@@ -16,6 +16,4 @@ app.use(require('../controllers/root'));
 
 app.use(require('../middlewares/error'));
 
-const socketIoServer = require('http').createServer(app);
-
-module.exports = socketIoServer;
+module.exports = app;
