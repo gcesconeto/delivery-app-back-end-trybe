@@ -11,6 +11,7 @@
   "scripts": {
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "start": "node .",
+    "jest": "./node_modules/.bin/jest",
     "dev": "nodemon .",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
@@ -30,10 +31,11 @@
   "devDependencies": {
     "eslint": "6.8.0",
     "eslint-config-trybe-backend": "1.0.3",
-    "nodemon": "2.0.4",
+    "frisby": "^2.1.3",
     "jest": "26.0.1",
+    "nodemon": "2.0.4",
     "sequelize-cli": "6.2.0",
-    "supertest": "4.0.2",
-    "shelljs": "0.8.4"
+    "shelljs": "0.8.4",
+    "supertest": "4.0.2"
   }
 }
