@@ -1,65 +1,41 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable max-lines-per-function */
 const request = require('supertest');
-const shell = require('shelljs');
 const app = require('../api/app');
-const db = require('../database/models');
+const DATA = require('./testData');
+const { resetDB, killDB } = require('./toolsDB');
 
 describe('POST `/user/register`', () => {
-    beforeEach(() => {
-        shell.exec('npx sequelize-cli db:drop');
-        shell.exec('npx sequelize-cli db:create');
-        shell.exec('npx sequelize-cli db:migrate');
-        shell.exec('npx sequelize-cli db:seed:all');
-    });
-
-    afterAll(() => {
-        db.sequelize.close();
-    });
+    beforeEach(() => resetDB());
+    afterAll(() => killDB());
 
     it('Should receive status 201 and a token', async () => {
-        const response = await request(app).post('/user/register').send({
-            name: 'Test Consumer Name',
-            email: 'consumer@gmail.com',
-            password: 'imAPassword',
-        });
+        const response = await request(app).post('/user/register').send(DATA.newUser);
         expect(response.status).toBe(201);
         expect(response.body.token).toBeDefined();
     });
 
     it('Should receive status 422 if name is invalid', async () => {
-        const response = await request(app).post('/user/register').send({
-            name: 43,
-            email: 'consumer@gmail.com',
-            password: 'imAPassword',
-        });
+        const response = await request(app).post('/user/register')
+            .send({ ...DATA.newUser, name: 43 });
         expect(response.status).toBe(422);
     });
 
     it('Should receive status 422 if name is shorter than 12 characters', async () => {
-        const response = await request(app).post('/user/register').send({
-            name: 'Test',
-            email: 'consumer@gmail.com',
-            password: 'imAPassword',
-        });
+        const response = await request(app).post('/user/register')
+            .send({ ...DATA.newUser, name: 'Test' });
         expect(response.status).toBe(422);
     });
 
     it('Should receive status 422 if email is invalid', async () => {
-        const response = await request(app).post('/user/register').send({
-            name: 'Test Consumer Name',
-            email: 'consumer@ gmail.com',
-            password: 'imAPassword',
-        });
+        const response = await request(app).post('/user/register')
+            .send({ ...DATA.newUser, email: 'consumer@ gmail.com' });
         expect(response.status).toBe(422);
     });
 
     it('Should receive status 422 if password is shorter than 6 characters', async () => {
-        const response = await request(app).post('/user/register').send({
-            name: 'Test Consumer Name',
-            email: 'consumer@gmail.com',
-            password: 'imA',
-        });
+        const response = await request(app).post('/user/register')
+            .send({ ...DATA.newUser, password: 'imA' });
         expect(response.status).toBe(422);
     });
 });
