@@ -1,4 +1,4 @@
-// Client Socket.io rodando no servidor para emitir mudanças de status no db
+// Client Socket.io running on server to send status updates in real-time:
 const ioClient = require('socket.io-client');
 
 const port = process.env.PORT || 3001;
@@ -9,7 +9,7 @@ const socket = ioClient.connect(`http://localhost:${port}`, {
 
 socket.on('connect', () => console.log('Sale update emitter client connected'));
 
-// Resto do service
+// Service:
 const { sale, user } = require('../../database/models');
 
 const err = require('../../errors/errors');
@@ -32,10 +32,12 @@ const nextStatus = (status, role) => {
 };
 
 module.exports = async ({ saleId, role, email }) => {
+    const found = await sale.findByPk(saleId);
+    if (!found) throw err.NOT_FOUND;
     const saleUser = await user.findOne({ where: { email } });
     if (!saleUser) throw err.UNAUTHORIZED;
-    const { status } = await sale.findByPk(saleId);
-    const newStatus = nextStatus(status, role);
+    const newStatus = nextStatus(found.status, role);
     await sale.update({ status: newStatus }, { where: { id: saleId } });
+    // Emit status update to socket:
     socket.emit('updateStatus', { saleId });
 };

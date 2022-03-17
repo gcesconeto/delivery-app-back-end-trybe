@@ -2,6 +2,7 @@
 module.exports = {
     admLogin: { email: 'adm@deliveryapp.com', password: '--adm2@21!!--' },
     usrLogin: { email: 'zebirita@email.com', password: '$#zebirita#$' },
+    sellerLogin: { email: 'fulana@deliveryapp.com', password: 'fulana@123' },
     admEmail: { email: 'adm@deliveryapp.com' },
     usrEmail: { email: 'zebirita@email.com' },
     wrongEmail: { email: 'idontexist@email.com' },
