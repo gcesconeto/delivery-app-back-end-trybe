@@ -5,10 +5,12 @@ const shell = require('shelljs');
 const app = require('../api/app');
 const db = require('../database/models');
 
-describe('Test endpoint POST `/user/register`', () => {
+describe('POST `/user/register`', () => {
     beforeEach(() => {
         shell.exec('npx sequelize-cli db:drop');
-        shell.exec('npx sequelize-cli db:create && npx sequelize-cli db:migrate');
+        shell.exec('npx sequelize-cli db:create');
+        shell.exec('npx sequelize-cli db:migrate');
+        shell.exec('npx sequelize-cli db:seed:all');
     });
 
     afterAll(() => {

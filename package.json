@@ -8,13 +8,6 @@
   },
   "engineStrict": true,
   "private": true,
-  "scripts": {
-    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
-    "start": "node .",
-    "jest": "./node_modules/.bin/jest",
-    "dev": "nodemon .",
-    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
-  },
   "dependencies": {
     "cors": "2.8.5",
     "dotenv": "8.2.0",
@@ -27,6 +20,13 @@
     "sequelize": "6.3.4",
     "socket.io": "3.0.4",
     "socket.io-client": "^4.4.1"
+  },
+  "scripts": {
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "start": "node .",
+    "test": "jest --runInBand",
+    "dev": "nodemon .",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
   "devDependencies": {
     "eslint": "6.8.0",

@@ -5,11 +5,12 @@ const shell = require('shelljs');
 const app = require('../api/app');
 const db = require('../database/models');
 
-describe('Test endpoint GET `/user/list`', () => {
+describe('GET `/user/list`', () => {
     beforeEach(() => {
-      shell.exec('npx sequelize-cli db:drop');
-      shell.exec('npx sequelize-cli db:create && npx sequelize-cli db:migrate');
-      shell.exec('npx sequelize-cli db:seed:all');
+        shell.exec('npx sequelize-cli db:drop');
+        shell.exec('npx sequelize-cli db:create');
+        shell.exec('npx sequelize-cli db:migrate');
+        shell.exec('npx sequelize-cli db:seed:all');
     });
 
     afterAll(() => {
