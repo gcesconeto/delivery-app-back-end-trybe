@@ -1,7 +1,7 @@
 # Delivery App Backend - Trybe
 
 ## Context
----
+
 This API was developed as part of a project during the back-end module of my course at Trybe. It is for a simple delivery type app with the following features:
 * User creation.
 * User login.
@@ -21,7 +21,7 @@ These are the main technologies used:
 
 
 ## Installation
----
+
 ### Pre-requisites:
 * MySQL
 * npm
@@ -42,7 +42,7 @@ These are the main technologies used:
     `MYSQL_DB_NAME=delivery-app`  <- the database name\
 
 ## Using the API
----
+
 Run `npm start` in the root directory, these endpoints will be available at http://localhost:3001/sale/create (default)
 ### Endpoints:
   * POST `/user/register`:
@@ -84,7 +84,7 @@ Run `npm start` in the root directory, these endpoints will be available at http
 This API emits an `statusUpdate` event for every successfull request to "PUT `/sale/update/:id`" with the sale id and it's new status. 
 
 ## Tests
----
+
 Integration tests were created for every endpoint covering the happy & unhappy paths.\
 To run them use `npm run test`.
 
