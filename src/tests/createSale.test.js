@@ -1,5 +1,3 @@
-/* eslint-disable sonarjs/no-duplicate-string */
-/* eslint-disable max-lines-per-function */
 const request = require('supertest');
 const app = require('../api/app');
 const DATA = require('./testData');
