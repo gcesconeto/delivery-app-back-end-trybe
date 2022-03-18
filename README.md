@@ -2,22 +2,20 @@
 
 ## Context
 ---
-This API was developed as part of a project during the back-end module of my course at Trybe.
-
-This is an API for a simple delivery type app with the following features:
-* User creation
-* User login
-* User listing
-* User deletion
-* Product listing
-* Sale creation between specific seller and user
-* Sale listing
-* Sale status update
+This API was developed as part of a project during the back-end module of my course at Trybe. It is for a simple delivery type app with the following features:
+* User creation.
+* User login.
+* User listing.
+* User deletion.
+* Product listing.
+* Sale creation between specific seller and user.
+* Sale listing.
+* Sale status update.
 
 These are the main technologies used:
-* Node + express for the API;
-* JWT for authentication and user identification;
-* MySQL + sequelize ORM as the database;
+* Node + express for the API.
+* JWT for authentication and user identification.
+* MySQL + sequelize ORM as the database.
 * Socket.IO to provide real-time updates of DB changes.
 * Jest + supertest for integration tests.
 
@@ -28,12 +26,12 @@ These are the main technologies used:
 * MySQL
 * npm
 ### Setup:
-* Clone the repository https://github.com/gcesconeto/delivery-app-back-end-trybe;
-* Open a terminal window inside the project folder and
+* Clone the repository https://github.com/gcesconeto/delivery-app-back-end-trybe.
+* Open a terminal window inside the project folder and:
   * run `npm install`
   * run `npm run db:reset`
   
-* Create a .env file on the root directory following this layout
+* Create a .env file on the root directory following this layout:
 
     `NODE_ENV=development`        <- environment\
     `API_PORT=3001`                   <- the PORT for the API to run\
@@ -88,13 +86,13 @@ This API emits an `statusUpdate` event for every successfull request to "PUT `/s
 ## Tests
 ---
 Integration tests were created for every endpoint covering the happy & unhappy paths.\
-To run them use `npm run test` 
+To run them use `npm run test`.
 
 ## Next steps
 
-* Implement further features such as creation of new products and stock-keeping for individual sellers;
-* Refactor for better separation of authentication layers;
-* Dockerization;
+* Implement further features such as creation of new products and stock-keeping for individual sellers.
+* Refactor for better separation of authentication layers.
+* Dockerization.
 
 
 ## Contact
