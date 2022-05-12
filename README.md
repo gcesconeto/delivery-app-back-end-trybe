@@ -43,7 +43,7 @@ These are the main technologies used:
 
 ## Using the API
 
-Run `npm start` in the root directory, these endpoints will be available at http://localhost:3001/sale/create (default)
+Run `npm start` in the root directory, these endpoints will be available at http://localhost:3001/ (default)
 ### Endpoints:
   * POST `/user/register`:
     * Receives the name, email and password of the new consumer user.
